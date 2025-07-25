@@ -19,6 +19,13 @@ namespace BrcFoodApp.WebApi.Controllers
             _apiContext = apiContext;
         }
 
+        [HttpGet]
+        public IActionResult CategoriesList()
+        {
+            var values = _apiContext.Categories.ToList();
+            return Ok(values);
+        }
+
         [HttpPost]
         public IActionResult CreateCategory(Category category)
         {
@@ -27,6 +34,30 @@ namespace BrcFoodApp.WebApi.Controllers
             if (result >= 1)
                 return Ok("Kategori başarıyla eklendi");
             return BadRequest("Kategori eklenirken bir hata oluştu");
+        }
+
+        [HttpPut]
+        public IActionResult UpdateCategory(Category category)
+        {
+            _apiContext.Categories.Update(category);
+            _apiContext.SaveChanges();
+            return Ok("Kategori Güncelleme işlemi başarılı");
+        }
+
+        [HttpGet("GetCategoryById")]
+        public IActionResult GetCategoryById(int id)
+        {
+            var value = _apiContext.Categories.Find(id);
+            return Ok(value);
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteCategory(int id)
+        {
+            var value = _apiContext.Categories.Find(id);
+            _apiContext.Categories.Remove(value);
+            _apiContext.SaveChanges();
+            return Ok($"{value.CategoryName} isimli kategori silindi");
         }
     }
 }

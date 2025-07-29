@@ -37,5 +37,35 @@ namespace BrcFoodApp.WebApi.Controllers
             _apiContext.SaveChanges();
             return Ok("Kayıt işlemi başarılı.");
         }
+
+        [HttpDelete]
+        public IActionResult DeleteContact(int id)
+        {
+            var value = _apiContext.Contacts.Find(id);
+            _apiContext.Contacts.Remove(value);
+            _apiContext.SaveChanges();
+            return Ok("Silme işlemi başarılı");
+        }
+
+        [HttpGet("GetByContactId")]
+        public IActionResult GetByContactId(int id)
+        {
+            var value = _apiContext.Contacts.Find(id);
+            return Ok(value);
+        }
+
+        [HttpPut]
+        public IActionResult UpdateContact(UpdateContactDto updateContact)
+        {
+            Contact contact = new Contact();
+            contact.Email = updateContact.Email;
+            contact.Address = updateContact.Address;
+            contact.Phone = updateContact.Phone;
+            contact.MapLocation = updateContact.MapLocation;
+            contact.OpenHours = updateContact.OpenHours;
+            _apiContext.Contacts.Update(contact);
+            _apiContext.SaveChanges();
+            return Ok("Güncelleme işlemi başarılı");
+        }
     }
 }

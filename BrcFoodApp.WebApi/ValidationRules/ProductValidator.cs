@@ -14,8 +14,8 @@ namespace BrcFoodApp.WebApi.ValidationRules
 
             RuleFor(x => x.Price)
             .NotEmpty().WithMessage("Fiyat bilgisi boş bırakılamaz!")
-            .LessThan(0).WithMessage("Fiyat bilgisi negatif olamaz!")
-            .GreaterThan(1000).WithMessage("Fiyat bilgisi 1000 yüksek olamaz");
+            .GreaterThan(0).WithMessage("Fiyat bilgisi negatif olamaz!")
+            .LessThan(1000).WithMessage("Fiyat bilgisi 1000 yüksek olamaz");
 
             RuleFor(x => x.Description).NotEmpty().WithMessage("Açıklama kısmı boş bırakılamaz");
         }

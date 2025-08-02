@@ -1,5 +1,8 @@
 using System.Reflection;
 using BrcFoodApp.WebApi.Context;
+using BrcFoodApp.WebApi.Entities;
+using BrcFoodApp.WebApi.ValidationRules;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +12,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddDbContext<ApiContext>();
+builder.Services.AddScoped<IValidator<Product>, ProductValidator>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

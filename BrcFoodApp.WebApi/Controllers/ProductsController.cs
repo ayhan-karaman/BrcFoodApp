@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using BrcFoodApp.WebApi.Context;
+using BrcFoodApp.WebApi.Dtos.ProductDtos;
 using BrcFoodApp.WebApi.Entities;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
@@ -15,11 +17,13 @@ namespace BrcFoodApp.WebApi.Controllers
     {
         private readonly IValidator<Product> _validator;
         private readonly ApiContext _apiContext;
+        private readonly IMapper _mapper;
 
-        public ProductsController(IValidator<Product> validator, ApiContext apiContext)
+        public ProductsController(IValidator<Product> validator, ApiContext apiContext, IMapper mapper)
         {
             _validator = validator;
             _apiContext = apiContext;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -75,6 +79,15 @@ namespace BrcFoodApp.WebApi.Controllers
                 _apiContext.SaveChanges();
                 return Ok(new { message = "Güncelleme işlemi başarılı", data = product });
             }
+        }
+
+        [HttpPost("CreateProductWithCategory")]
+        public IActionResult CreateProductWithCategory(CreateProductDto productDto)
+        {
+            var value = _mapper.Map<Product>(productDto);
+            _apiContext.Add(value);
+            _apiContext.SaveChanges();
+            return Ok("Ekleme işlemi başarılı.");
         }
     }
 }

@@ -8,6 +8,7 @@ using BrcFoodApp.WebApi.Dtos.ProductDtos;
 using BrcFoodApp.WebApi.Entities;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BrcFoodApp.WebApi.Controllers
 {
@@ -88,6 +89,14 @@ namespace BrcFoodApp.WebApi.Controllers
             _apiContext.Add(value);
             _apiContext.SaveChanges();
             return Ok("Ekleme işlemi başarılı.");
+        }
+
+        [HttpGet("ProductListWithCategory")]
+        public IActionResult ProductListWithCategory()
+        {
+            var products = _apiContext.Products.Include(x => x.Category);
+            var value = _mapper.Map<List<ResultProductWithCategoryDto>>(products);
+            return Ok(value);
         }
     }
 }

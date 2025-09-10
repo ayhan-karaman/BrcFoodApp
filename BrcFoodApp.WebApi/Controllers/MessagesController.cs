@@ -35,6 +35,14 @@ namespace BrcFoodApp.WebApi.Controllers
             _apiContext.SaveChanges();
             return Ok("Mesaj ekleme işlemi başarılı");
         }
+        [HttpPost("CreateRangeMessage")]
+        public IActionResult CreateRangeMessage(List<CreateMessageDto> createMessages)
+        {
+            var values = _mapper.Map<List<Message>>(createMessages);
+            _apiContext.Messages.AddRange(values);
+            _apiContext.SaveChanges();
+            return Ok("Mesajların ekleme işlemi başarılı");
+        }
 
         [HttpDelete]
         public IActionResult DeleteMessage(int id)
@@ -59,6 +67,13 @@ namespace BrcFoodApp.WebApi.Controllers
         {
             var value = _mapper.Map<GetByIdMessageDto>(_apiContext.Messages.Find(id));
             return Ok(value);
+        }
+
+        [HttpGet("GetMessageByIsReadFalse")]
+        public IActionResult GetMessageByIsReadFalse()
+        {
+            var values = _mapper.Map<List<ResultMessageDto>>(_apiContext.Messages.Where(x => x.IsRead.Equals(false)));
+            return Ok(values);
         }
     }
 }

@@ -32,6 +32,14 @@ namespace BrcFoodApp.WebApi.Controllers
             return Ok("Şef başarıyla sisteme eklendi.");
         }
 
+        [HttpPost("AddRangeChef")]
+        public IActionResult AddRangeChef(List<Chef> chefs)
+        {
+            _apiContext.Chefs.AddRange(chefs);
+            _apiContext.SaveChanges();
+            return Ok("Şefler başarıyla sisteme eklendi.");
+        }
+
         [HttpPut]
         public IActionResult UpdateChef(Chef chef)
         {

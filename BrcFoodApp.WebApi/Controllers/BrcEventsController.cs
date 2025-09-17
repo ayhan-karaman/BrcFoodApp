@@ -32,6 +32,15 @@ namespace BrcFoodApp.WebApi.Controllers
                 return Ok("Etkinlik başarıyla eklendi");
             return BadRequest("Etkinlik eklenirken bir hata oluştu");
         }
+        [HttpPost("AddRangeBrcEvent")]
+        public IActionResult AddRangeBrcEvent(List<BrcEvent> brcEvents)
+        {
+            _apiContext.BrcEvents.AddRange(brcEvents);
+            var result = _apiContext.SaveChanges();
+            if (result >= 1)
+                return Ok("Etkinlikler başarıyla eklendi");
+            return BadRequest("Etkinlikler eklenirken bir hata oluştu");
+        }
 
         [HttpPut]
         public IActionResult UpdateBrcEvent(BrcEvent brcEvent)

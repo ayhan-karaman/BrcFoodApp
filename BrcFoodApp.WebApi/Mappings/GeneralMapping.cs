@@ -1,5 +1,6 @@
 
 using AutoMapper;
+using BrcFoodApp.WebApi.Dtos.CategoryDtos;
 using BrcFoodApp.WebApi.Dtos.FeatureDtos;
 using BrcFoodApp.WebApi.Dtos.MessageDtos;
 using BrcFoodApp.WebApi.Dtos.NotificationDtos;
@@ -16,6 +17,12 @@ namespace BrcFoodApp.WebApi.Mappings
             CreateMap<Feature, CreateFeatureDto>().ReverseMap();
             CreateMap<Feature, UpdateFeatureDto>().ReverseMap();
             CreateMap<Feature, GetByIdFeatureDto>().ReverseMap();
+
+
+            CreateMap<Category, ResultCategoryDto>().ReverseMap();
+            CreateMap<Category, CreateCategoryDto>().ReverseMap();
+            CreateMap<Category, UpdateCategoryDto>().ReverseMap();
+            CreateMap<Category, GetByIdCategoryDto>().ReverseMap();
 
             CreateMap<Message, ResultMessageDto>().ReverseMap();
             CreateMap<Message, CreateMessageDto>().ReverseMap();

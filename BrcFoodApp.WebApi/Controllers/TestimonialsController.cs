@@ -31,6 +31,15 @@ namespace BrcFoodApp.WebApi.Controllers
                 return Ok("Referans başarıyla eklendi");
             return BadRequest("Referans eklenirken bir hata oluştu");
         }
+        [HttpPost("CreateRangeTestimonial")]
+        public IActionResult CreateRangeTestimonial(List<Testimonial> testimonials)
+        {
+            _apiContext.Testimonials.AddRange(testimonials);
+            var result = _apiContext.SaveChanges();
+            if (result >= 1)
+                return Ok("Referanslar başarıyla eklendi");
+            return BadRequest("Referanslar eklenirken bir hata oluştu");
+        }
 
         [HttpPut]
         public IActionResult UpdateTestimonial(Testimonial testimonial)

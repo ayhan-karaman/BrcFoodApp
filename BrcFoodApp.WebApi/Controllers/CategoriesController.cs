@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using BrcFoodApp.WebApi.Context;
+using BrcFoodApp.WebApi.Dtos.CategoryDtos;
 using BrcFoodApp.WebApi.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,10 +15,12 @@ namespace BrcFoodApp.WebApi.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly ApiContext _apiContext;
+        private readonly IMapper _mapper;
 
-        public CategoriesController(ApiContext apiContext)
+        public CategoriesController(ApiContext apiContext, IMapper mapper)
         {
             _apiContext = apiContext;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -34,6 +38,16 @@ namespace BrcFoodApp.WebApi.Controllers
             if (result >= 1)
                 return Ok("Kategori başarıyla eklendi");
             return BadRequest("Kategori eklenirken bir hata oluştu");
+        }
+        [HttpPost("AddRangeCategory")]
+        public IActionResult AddRangeCategory(List<CreateCategoryDto> categories)
+        {
+            var values = _mapper.Map<List<Category>>(categories);
+            _apiContext.Categories.AddRange(values);
+            var result = _apiContext.SaveChanges();
+            if (result >= 1)
+                return Ok("Kategoriler başarıyla eklendi");
+            return BadRequest("Kategoriler eklenirken bir hata oluştu");
         }
 
         [HttpPut]

@@ -32,6 +32,17 @@ namespace BrcFoodApp.WebApi.Controllers
             return BadRequest("Hizmet eklenirken bir hata oluştu");
         }
 
+
+        [HttpPost("CreateRangeService")]
+        public IActionResult CreateRangeService(List<Service> services)
+        {
+            _apiContext.Services.AddRange(services);
+            var result = _apiContext.SaveChanges();
+            if (result >= 1)
+                return Ok("Hizmetler başarıyla eklendi");
+            return BadRequest("Hizmetler eklenirken bir hata oluştu");
+        }
+
         [HttpPut]
         public IActionResult UpdateService(Service service)
         {

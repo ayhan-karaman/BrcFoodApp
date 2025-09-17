@@ -91,6 +91,15 @@ namespace BrcFoodApp.WebApi.Controllers
             return Ok("Ekleme işlemi başarılı.");
         }
 
+        [HttpPost("CreateRangeProductWithCategory")]
+        public IActionResult CreateRangeProductWithCategory(List<CreateProductDto> productDtos)
+        {
+            var value = _mapper.Map<List<Product>>(productDtos);
+            _apiContext.Products.AddRange(value);
+            _apiContext.SaveChanges();
+            return Ok("Ekleme işlemi başarılı.");
+        }
+
         [HttpGet("ProductListWithCategory")]
         public IActionResult ProductListWithCategory()
         {

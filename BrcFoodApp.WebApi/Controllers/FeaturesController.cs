@@ -36,6 +36,15 @@ namespace BrcFoodApp.WebApi.Controllers
             return Ok("Ekleme işlemi başarılı");
         }
 
+        [HttpPost("AddRangeFeature")]
+        public IActionResult AddRangeFeature(List<CreateFeatureDto> createFeatures)
+        {
+            var values = _mapper.Map<List<Feature>>(createFeatures);
+            _apiContext.Features.AddRange(values);
+            _apiContext.SaveChanges();
+            return Ok("Ekleme işlemi başarılı");
+        }
+
         [HttpDelete]
         public IActionResult DeleteFeature(int id)
         {

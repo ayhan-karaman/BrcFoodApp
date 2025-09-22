@@ -31,9 +31,10 @@ namespace BrcFoodApp.WebApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateCategory(Category category)
+        public IActionResult CreateCategory(CreateCategoryDto createCategoryDto)
         {
-            _apiContext.Categories.Add(category);
+            var value = _mapper.Map<Category>(createCategoryDto);
+            _apiContext.Categories.Add(value);
             var result = _apiContext.SaveChanges();
             if (result >= 1)
                 return Ok("Kategori başarıyla eklendi");

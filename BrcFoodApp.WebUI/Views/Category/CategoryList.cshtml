@@ -1,3 +1,5 @@
+@model List<BrcFoodApp.WebUI.DTOs.CategoryDtos.ResultCategoryDto>
+
 @{
     ViewData["Title"] = "Kategori Listesi";
     Layout = "~/Views/AdminLayout/Index.cshtml";
@@ -9,37 +11,40 @@
             <div class="col-12 col-md-12 col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Simple</h4>
+                        <h4>Kategori Listesi</h4>
                     </div>
                     <div class="card-body">
+                        <a href="/Category/CreateCategory" class="btn my-3 btn-outline-success">
+                           <i class="fas fa-plus-square "></i>
+                           Yeni Kategori
+                        </a>
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
+                                    <th scope="col">#I</th>
+                                    <th scope="col">Kategori Adı</th>
+                                    <th scope="col">Aksiyonlar</th>
                                 </tr>
                             </thead>
                             <tbody>
+                            @foreach(var item in Model)
+                            {
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
+                                    <th scope="row">@item.Id</th>
+                                    <td>@item.CategoryName</td>
+                                    <td>
+                                       <div class="btn-group">
+                                            <a href="/Category/UpdateCategory/@item.Id" class="btn btn-outline-warning">
+                                              <i class="fas fa-pencil-alt"></i>
+                                            </a>
+                                            <a href="/Category/DeleteCategory/@item.Id" class="btn btn-outline-danger">
+                                              <i class="fas fa-trash-alt"></i>
+                                            </a>
+                                       </div>
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>twitter</td>
-                                </tr>
+                            }
+                               
                             </tbody>
                         </table>
                     </div>

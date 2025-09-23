@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BrcFoodApp.WebUI.Controllers
 {
-    [Route("[controller]")]
     public class DefaultController : Controller
     {
         public IActionResult Index()

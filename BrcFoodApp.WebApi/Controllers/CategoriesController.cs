@@ -71,9 +71,9 @@ namespace BrcFoodApp.WebApi.Controllers
         public IActionResult DeleteCategory(int id)
         {
             var value = _apiContext.Categories.Find(id);
-            _apiContext.Categories.Remove(value);
+            _apiContext.Categories.Remove(value!);
             _apiContext.SaveChanges();
-            return Ok($"{value.CategoryName} isimli kategori silindi");
+            return Ok($"{value!.CategoryName} isimli kategori silindi");
         }
     }
 }

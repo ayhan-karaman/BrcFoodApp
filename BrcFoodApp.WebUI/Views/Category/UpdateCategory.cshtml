@@ -1,0 +1,30 @@
+@model BrcFoodApp.WebUI.DTOs.CategoryDtos.UpdateCategoryDto
+
+@{
+    ViewData["Title"] = "Kategori Oluştur";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Kategori Düzenle</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" asp-action="UpdateCategory">
+                            <div class="form-group">
+                                <input asp-for="Id" type="hidden" >
+                              <label asp-for="CategoryName" >Kategori Adı:</label>
+                              <input asp-for="CategoryName" class="form-control" >
+                            </div>
+                            <button type="submit" class="btn btn-success" >Güncelle</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

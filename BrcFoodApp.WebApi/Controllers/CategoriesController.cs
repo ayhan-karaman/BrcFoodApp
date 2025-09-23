@@ -52,9 +52,10 @@ namespace BrcFoodApp.WebApi.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateCategory(Category category)
+        public IActionResult UpdateCategory(UpdateCategoryDto updateCategoryDto)
         {
-            _apiContext.Categories.Update(category);
+             var value = _mapper.Map<Category>(updateCategoryDto);
+            _apiContext.Categories.Update(value);
             _apiContext.SaveChanges();
             return Ok("Kategori Güncelleme işlemi başarılı");
         }

@@ -36,6 +36,7 @@ namespace BrcFoodApp.WebApi.Mappings
             CreateMap<Notification, GetByIdNotificationDto>().ReverseMap();
 
             CreateMap<Product, CreateProductDto>().ReverseMap();
+            CreateMap<Product, UpdateProductDto>().ReverseMap();
             CreateMap<Product, ResultProductWithCategoryDto>()
             .ForMember(x => x.CategoryName, y => y.MapFrom(c => c.Category.CategoryName)).ReverseMap();
         }

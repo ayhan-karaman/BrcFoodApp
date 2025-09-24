@@ -67,8 +67,9 @@ namespace BrcFoodApp.WebApi.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateProduct(Product product)
+        public IActionResult UpdateProduct(UpdateProductDto updateProductDto)
         {
+            var product = _mapper.Map<Product>(updateProductDto);
             var validatorResult = _validator.Validate(product);
             if (!validatorResult.IsValid)
             {

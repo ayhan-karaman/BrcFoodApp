@@ -25,7 +25,9 @@
                             </div>
                             <div class="form-group">
                               <label asp-for="CategoryId" >Kategori:</label>
-                              <input  asp-for="CategoryId" class="form-control" >
+                               <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories" >
+                                  <option value="">Kategori Seçiniz</option>
+                               </select>
                             </div>
                             <div class="form-group">
                               <label asp-for="ImageUrl" >Image URL:</label>

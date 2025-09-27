@@ -1,14 +1,16 @@
 using System.Text;
+using BrcFoodApp.WebUI.DTOs.CategoryDtos;
 using BrcFoodApp.WebUI.DTOs.ProductDtos;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 
 namespace BrcFoodApp.WebUI.Controllers
 {
-  
+
     public class ProductController : Controller
     {
-       private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IHttpClientFactory _httpClientFactory;
 
         public ProductController(IHttpClientFactory httpClientFactory)
         {
@@ -30,10 +32,15 @@ namespace BrcFoodApp.WebUI.Controllers
 
 
         [HttpGet]
-        public IActionResult CreateProduct()
+        public async Task<IActionResult> CreateProduct()
         {
+            await ViewBagAppenedCategories();
+
             return View();
+
         }
+
+
 
         [HttpPost]
         public async Task<IActionResult> CreateProduct(CreateProductDto createProductDto)
@@ -60,10 +67,14 @@ namespace BrcFoodApp.WebUI.Controllers
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var value = JsonConvert.DeserializeObject<UpdateProductDto>(jsonData);
+                await ViewBagAppenedCategories();
+
                 return View(value);
             }
             return RedirectToAction("ProductList");
         }
+
+        
 
         [HttpPost]
         public async Task<IActionResult> UpdateProduct(UpdateProductDto updateProductDto)
@@ -81,13 +92,27 @@ namespace BrcFoodApp.WebUI.Controllers
         }
 
 
-        
+
         public async Task<IActionResult> DeleteProduct(int id)
         {
             var client = _httpClientFactory.CreateClient();
             await client.DeleteAsync($"https://localhost:7291/api/Products?id={id}");
             return RedirectToAction("ProductList");
 
+        }
+
+
+        private async Task ViewBagAppenedCategories()
+        {
+            var client = _httpClientFactory.CreateClient();
+            var categoryResponseMessage = await client.GetAsync("https://localhost:7291/api/Categories");
+            var categoryJsonData = await categoryResponseMessage.Content.ReadAsStringAsync();
+            var values = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(categoryJsonData);
+            ViewBag.Categories = values!.Select(x => new SelectListItem()
+            {
+                Text = x.CategoryName,
+                Value = x.Id.ToString()
+            }).ToList();
         }
     }
 }

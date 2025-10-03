@@ -1,0 +1,49 @@
+@model BrcFoodApp.WebUI.DTOs.AboutDtos.CreateAboutDto
+@{
+    ViewData["Title"] = "Hakkımızda Ekleme";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Hakkımızda Ekleme</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" asp-action="CreateAbout">
+                            <div class="form-group">
+                              <label asp-for="Title" >Başlık:</label>
+                              <input asp-for="Title" class="form-control" >
+                            </div>
+                            <div class="form-group">
+                              <label asp-for="ReservationNumber" >Rezervasyon Numarası:</label>
+                              <input type="text" asp-for="ReservationNumber" class="form-control" >
+                            </div>
+                            <div class="form-group">
+                              <label asp-for="Description" >Açıklama:</label>
+                              <textarea type="text" asp-for="Description" class="form-control" rows="5" ></textarea>
+                            </div>
+                             <div class="form-group">
+                              <label asp-for="ImageUrl" >Görsel URL:</label>
+                              <input type="text" asp-for="ImageUrl" class="form-control" >
+                            </div>
+                             <div class="form-group">
+                              <label asp-for="VideoCoverImageUrl" >Video Kapak Görsel URL:</label>
+                              <input type="text" asp-for="VideoCoverImageUrl" class="form-control" >
+                            </div>
+                             <div class="form-group">
+                              <label asp-for="VideoUrl" >Video URL (Embed Link):</label>
+                              <input type="text" asp-for="VideoUrl" class="form-control" >
+                            </div>
+                            <button type="submit" class="btn btn-success" >Kaydet</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

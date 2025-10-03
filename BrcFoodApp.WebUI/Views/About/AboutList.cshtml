@@ -1,0 +1,61 @@
+@model List<BrcFoodApp.WebUI.DTOs.AboutDtos.ResultAboutDto>
+
+@{
+    ViewData["Title"] = "Öne Çıkanlar Listesi";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Hakkımızda Alan İşlemleri</h4>
+                    </div>
+                    <div class="card-body">
+                        <a href="/About/CreateAbout" class="btn my-3 btn-outline-success @(Model.Count == 1 ? " disabled-link" : " ")">
+                           <i class="fas fa-plus-square "></i>
+                           @(Model.Count == 1 ? "Hakkımızda Mevcut" : "Yeni Hakkımızda Ekle" )
+                        </a>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#No</th>
+                                    <th scope="col">Başlık</th>
+                                    <th scope="col">Açıklama</th>
+                                    <th scope="col">Rezervasyon Numarası</th>
+                                    <th scope="col">Aksiyonlar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach(var item in Model)
+                            {
+                                count++;
+                                <tr>
+                                    <th scope="row">@count</th>
+                                    <td>@item.Title</td>
+                                    <td>@item.Description</td>
+                                    <td>@item.ReservationNumber</td>
+                                    <td>
+                                       <div class="btn-group">
+                                            <a href="/About/UpdateAbout/@item.Id" class="btn btn-outline-warning">
+                                              <i class="fas fa-pencil-alt"></i>
+                                            </a>
+                                            <a href="/About/DeleteAbout/@item.Id" class="btn btn-outline-danger">
+                                              <i class="fas fa-trash-alt"></i>
+                                            </a>
+                                       </div>
+                                    </td>
+                                </tr>
+                            }
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

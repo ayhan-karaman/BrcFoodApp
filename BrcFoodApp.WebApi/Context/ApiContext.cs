@@ -22,4 +22,5 @@ public class ApiContext : DbContext
     public DbSet<Testimonial> Testimonials { get; set; }
     public DbSet<BrcEvent> BrcEvents { get; set; }
     public DbSet<Notification> Notifications { get; set; }
+    public DbSet<About> Abouts { get; set; }
 }

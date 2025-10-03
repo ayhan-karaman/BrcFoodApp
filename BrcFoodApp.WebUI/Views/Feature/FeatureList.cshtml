@@ -15,9 +15,9 @@
                         <h4>Öne Çıkan Alan İşlemleri</h4>
                     </div>
                     <div class="card-body">
-                        <a disabled="@(count == 1)" href="/Feature/CreateFeature" class="btn my-3 btn-outline-success">
+                        <a href="/Feature/CreateFeature" class="btn my-3 btn-outline-success @(Model.Count == 1 ? " disabled-link" : " ")">
                            <i class="fas fa-plus-square "></i>
-                           Yeni Öne Çıkan
+                           @(Model.Count == 1 ? "Öne Çıkan Mevcut" : "Yeni Öne Çıkan Ekle" )
                         </a>
                         <table class="table">
                             <thead>
@@ -43,7 +43,7 @@
                                             <a href="/Feature/UpdateFeature/@item.Id" class="btn btn-outline-warning">
                                               <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <a href="/Product/DeleteFeature/@item.Id" class="btn btn-outline-danger">
+                                            <a href="/Feature/DeleteFeature/@item.Id" class="btn btn-outline-danger">
                                               <i class="fas fa-trash-alt"></i>
                                             </a>
                                        </div>

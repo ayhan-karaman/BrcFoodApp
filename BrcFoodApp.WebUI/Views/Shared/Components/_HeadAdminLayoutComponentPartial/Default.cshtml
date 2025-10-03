@@ -8,6 +8,17 @@
     <link rel="stylesheet" href="~/Admin/assets/css/style.css">
     <link rel="stylesheet" href="~/Admin/assets/css/components.css">
     <!-- Custom style CSS -->
-    <link rel="stylesheet" href="~/Admin/assets/css/custom.css">
     <link rel='shortcut icon' type='image/x-icon' href='~/Admin/assets/img/favicon.ico' />
+    <link rel="stylesheet" href="~/Admin/assets/css/custom.css">
+    <style>
+        .disabled-link {
+            pointer-events: none !important;
+            /* Tıklamayı engeller */
+            color: gray !important;
+            /* Görsel olarak pasif gösterir */
+            text-decoration: none !important;
+            cursor: default !important;
+            z-index: -1;
+        }
+    </style>
 </head>

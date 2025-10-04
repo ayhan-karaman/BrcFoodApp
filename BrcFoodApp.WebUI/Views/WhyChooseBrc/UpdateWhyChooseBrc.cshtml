@@ -1,0 +1,38 @@
+@model BrcFoodApp.WebUI.DTOs.WhyChooseBrcDtos.UpdateWhyChooseBrcDto
+
+@{
+    ViewData["Title"] = "Neden Biz Alan Güncelle";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Neden Biz Alan Güncelleme</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" asp-action="UpdateWhyChooseBrc">
+                            <input asp-for="Id" hidden />
+                            <div class="form-group">
+                              <label asp-for="Title" >Başlık:</label>
+                              <input type="text" asp-for="Title" class="form-control" >
+                            </div>
+                            <div class="form-group">
+                              <label asp-for="Description" >Açıklama:</label>
+                              <textarea type="text" asp-for="Description" class="form-control" rows="5" ></textarea>
+                            </div>
+                            <div class="form-group">
+                              <label asp-for="IconUrl" >Icon Url:</label>
+                              <input type="text" asp-for="IconUrl" class="form-control" >
+                            </div>
+                            <button type="submit" class="btn btn-success" >Güncelle</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
